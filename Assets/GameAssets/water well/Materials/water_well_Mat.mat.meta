@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 306e9041b2e0d9946820e14443d02463
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 4477
+  packageName: Traditional water well
+  packageVersion: 1.1
+  assetPath: Assets/Standard Assets/water well/Materials/water_well_Mat.mat
+  uploadId: 26930
