@@ -4,7 +4,7 @@ public class person_disease : Disease
 {
     private Color originalColor;
     private Material originalMaterial;
-    protected override void InitializeDisease()
+    public override void InitializeDisease()
     {
         // Set values either via code or Inspector
         spreadProbabilityDuringIncubation = 0.1f;
@@ -19,7 +19,7 @@ public class person_disease : Disease
         originalColor = originalMaterial.color;
     }
 
-    protected override void OnIncubationComplete()
+    public override void OnIncubationComplete()
     {
         // Add symptom visual effects or gameplay impacts
         originalMaterial.color = originalColor * new Color(0.5f, 1f, 0.5f);
