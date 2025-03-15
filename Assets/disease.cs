@@ -46,15 +46,15 @@ public abstract class Disease : MonoBehaviour
         InitializeDisease();
     }
 
-    protected virtual IEnumerator IncubationPeriod()
+    public virtual IEnumerator IncubationPeriod()
     {
         yield return new WaitForSeconds(incubationPeriodDuration);
         isIncubating = false;
         OnIncubationComplete();
     }
 
-    protected abstract void InitializeDisease(); // To be implemented by child classes
-    protected virtual void OnIncubationComplete() { } // Optional override
+    public abstract void InitializeDisease(); // To be implemented by child classes
+    public virtual void OnIncubationComplete() { } // Optional override
 
     public virtual bool TryInfect()
     {
