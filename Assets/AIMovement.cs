@@ -3,7 +3,7 @@ using UnityEngine.AI; // Required for NavMesh
 
 public class AIMovement : MonoBehaviour
 {
-    public Vector3 targetPos;
+    public Vector3 targetPos = new Vector3(0, 0, 0);
     private NavMeshAgent agent;
 
     void Start()
@@ -11,7 +11,7 @@ public class AIMovement : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();  // Get the NavMeshAgent component
     }
 
-    void Update()
+    public void UpdateTarget()
     {
         agent.SetDestination(targetPos);
     }
