@@ -10,8 +10,8 @@ public class person_disease : Disease
         spreadProbabilityDuringIncubation = 0.1f;
         spreadProbabilityAfterIncubation = 0.4f;
         interactionRadius = 3f;
-        deathProbability = 0.05f;
-        recoveryProbability = 0.7f;
+        deathProbability = 0.001f;
+        recoveryProbability = 0.6f;
         incubationPeriodDuration = 10f;
 
         Renderer rend = GetComponent<Renderer>();

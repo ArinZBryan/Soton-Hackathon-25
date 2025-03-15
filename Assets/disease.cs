@@ -72,6 +72,7 @@ public abstract class Disease : MonoBehaviour
     }
 
     protected virtual void Die() { 
+        // run done the death animation
         Destroy(gameObject);
     } // Example implementation
     protected virtual void Recover() {
@@ -79,4 +80,8 @@ public abstract class Disease : MonoBehaviour
         Destroy(this); 
     } // Remove disease component
     protected virtual void StaySick() { } // Custom logic in child classes
+
+    private void FixedUpdate() {
+        ResolveDisease();
+    }
 }
