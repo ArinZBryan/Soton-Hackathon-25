@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 3846543920995449714}
   - component: {fileID: 5433384684794463332}
   - component: {fileID: 6465999428668976342}
+  - component: {fileID: 7638193532401997888}
+  - component: {fileID: 2617002817199047794}
   m_Layer: 0
   m_Name: Villager
   m_TagString: Untagged
@@ -133,3 +135,31 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &7638193532401997888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2521957398504017079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9914a096947387241830d4c27c566730, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetPos: {x: 0, y: 0, z: 0}
+  agent: {fileID: 6465999428668976342}
+--- !u!114 &2617002817199047794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2521957398504017079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a4c85d38ea09584eaefa9c2c0ee7816, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tasks: []
+  AIMovement: {fileID: 7638193532401997888}
