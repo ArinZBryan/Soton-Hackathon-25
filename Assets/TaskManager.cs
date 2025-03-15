@@ -26,10 +26,11 @@ public class TaskManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        rng = new System.Random();
         GameObject[] TP_objects = GameObject.FindGameObjectsWithTag("TaskPoint");
         Debug.Log("Found " + TP_objects.Length.ToString() + " tasks");
         for (int i = 0; i < TP_objects.Length; i++) { tasks.Add(TP_objects[i].GetComponent<Task>()); }
-        rng = new System.Random();
+        
         getNewTask();
 
     }

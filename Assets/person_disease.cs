@@ -2,16 +2,15 @@ using UnityEngine;
 
 public class person_disease : Disease
 {
-    private Color originalColor;
-    private Material originalMaterial;
     public override void InitializeDisease()
     {
+        Debug.Log("Initialised Disease");
         // Set values either via code or Inspector
-        spreadProbabilityDuringIncubation = 0.1f;
-        spreadProbabilityAfterIncubation = 0.4f;
+        spreadProbabilityDuringIncubation = 1f;
+        spreadProbabilityAfterIncubation = 1f;
         interactionRadius = 3f;
-        deathProbability = 0.001f;
-        recoveryProbability = 0.6f;
+        deathProbability = 0.000f;
+        recoveryProbability = 0.002f;
         incubationPeriodDuration = 10f;
 
         Renderer rend = GetComponent<Renderer>();
@@ -32,6 +31,7 @@ public class person_disease : Disease
 
     protected override void Recover()
     {
+        gameObject.GetComponent<Infectible>().myDiseases.Remove(this);
         base.Recover();
     }
 }

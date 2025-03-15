@@ -3,8 +3,8 @@ using UnityEngine;
 
 public abstract class Disease : MonoBehaviour
 {
-    private Color originalColor;
-    private Material originalMaterial;
+    protected Color originalColor;
+    protected Material originalMaterial;
 
     [Header("Transmission Settings")]
     [SerializeField][Range(0, 1)] protected float spreadProbabilityDuringIncubation = 0.2f;
@@ -40,7 +40,7 @@ public abstract class Disease : MonoBehaviour
         staySickProbability = 1f - deathProbability - recoveryProbability;
     }
 
-    protected virtual void Start()
+    public virtual void Start()
     {
         StartCoroutine(IncubationPeriod());
         InitializeDisease();
@@ -76,8 +76,11 @@ public abstract class Disease : MonoBehaviour
         Destroy(gameObject);
     } // Example implementation
     protected virtual void Recover() {
+        Debug.Log("Tried To Recover");
+        Debug.Log(originalColor.ToString());
+        Debug.Log(originalMaterial.ToString());
         originalMaterial.color = originalColor;
-        Destroy(this); 
+        Destroy(gameObject.GetComponent(this.GetType()));
     } // Remove disease component
     protected virtual void StaySick() { } // Custom logic in child classes
 
