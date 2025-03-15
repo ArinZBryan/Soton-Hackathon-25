@@ -3,6 +3,9 @@ using UnityEngine;
 
 public abstract class Disease : MonoBehaviour
 {
+    private Color originalColor;
+    private Material originalMaterial;
+
     [Header("Transmission Settings")]
     [SerializeField][Range(0, 1)] protected float spreadProbabilityDuringIncubation = 0.2f;
     [SerializeField][Range(0, 1)] protected float spreadProbabilityAfterIncubation = 0.5f;
@@ -55,8 +58,8 @@ public abstract class Disease : MonoBehaviour
 
     public virtual bool TryInfect()
     {
-        if (isIncubating) return false;
-        return Random.value <= spreadProbabilityAfterInteraction;
+        if (isIncubating) return Random.value <= spreadProbabilityDuringIncubation;
+        return Random.value <= spreadProbabilityAfterIncubation;
     }
 
     public virtual void ResolveDisease()

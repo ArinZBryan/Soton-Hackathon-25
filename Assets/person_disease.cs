@@ -28,7 +28,6 @@ public class person_disease : Disease
     protected override void StaySick()
     {
         // Implement persistent effects
-        GetComponent<Movement>().speed *= 0.5f;
     }
 
     protected override void Recover()
