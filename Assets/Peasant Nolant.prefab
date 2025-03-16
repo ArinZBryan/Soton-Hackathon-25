@@ -1325,7 +1325,7 @@ GameObject:
   - component: {fileID: 1328071931404268300}
   m_Layer: 0
   m_Name: Peasant Nolant
-  m_TagString: Untagged
+  m_TagString: Villager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1468,7 +1468,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tasks: []
-  currentTaskPosition: {x: 0, y: 0, z: 0}
   currentTaskDuration: 0
   AIMovement: {fileID: 3771990173487219392}
 --- !u!114 &7078203414125241413

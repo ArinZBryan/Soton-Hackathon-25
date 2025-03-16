@@ -15,13 +15,14 @@ public class Infectible : MonoBehaviour
     {
         infectArea = GetComponent<SphereCollider>();
         infectArea.enabled = true;
-        //mask = LayerMask.GetMask("Villagers");
+        mask = LayerMask.GetMask("Villagers");
     }
 
     // Update is called once per frame
     void Update()
     {
-        for (int i = 0; i < myImmunity.Count; i++) {
+        for (int i = 0; i < myImmunity.Count; i++)
+        {
             float Immunityduration = myImmunity[i].immunityDuration;
             if (Time.time - myImmunity[i].startTime > Immunityduration)
             {
@@ -31,9 +32,9 @@ public class Infectible : MonoBehaviour
 
     }
 
-    void OnTriggerEnter(Collider collider)
+    void OnTriggerStay(Collider collider)
     {
-        //if (collider.includeLayers == mask)
+        if (collider.transform.gameObject.tag == "Villager" || collider.transform.gameObject.tag == "TaskPoint")
         {
             GameObject collidedWith = collider.gameObject;
             for (int i = 0; i < myDiseases.Count; i++)
@@ -45,11 +46,20 @@ public class Infectible : MonoBehaviour
                     {
                         Infectible collidedWithInfectable = collidedWith.GetComponent<Infectible>();
 
-                        for (int j = 0; j < collidedWithInfectable.myImmunity.Count; j++) {
-                            if (myImmunity[j].diseaseType != diseaseType) {
-                                collidedWith.AddComponent(diseaseType);
-                                collidedWithInfectable.myDiseases.Add((Disease)collidedWith.GetComponent(diseaseType));
+                        Debug.Log(collidedWithInfectable.ToString());
+
+                        bool immune = false;
+                        foreach (var item in collidedWithInfectable.myImmunity)
+                        {
+                            if (item.diseaseType == diseaseType)
+                            {
+                                immune = true;
                             }
+                        }
+                        if (!immune)
+                        {
+                            collidedWith.AddComponent(diseaseType);
+                            collidedWithInfectable.myDiseases.Add((Disease)collidedWith.GetComponent(diseaseType));
                         }
                     }
                 }

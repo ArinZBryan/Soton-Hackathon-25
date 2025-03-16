@@ -12,8 +12,8 @@ public abstract class Disease : MonoBehaviour
     [SerializeField] protected float interactionRadius = 2f;
 
     [Header("Outcome Probabilities")]
-    [SerializeField][Range(0, 1)] protected float deathProbability = 0.1f;
-    [SerializeField][Range(0, 1)] protected float recoveryProbability = 0.3f;
+    [SerializeField][Range(0, 1)] protected float deathProbability = 0.0f;
+    [SerializeField][Range(0, 1)] protected float recoveryProbability = 0.0f;
     protected float staySickProbability; // Calculated automatically
 
     [Header("Disease Timing")]
@@ -23,6 +23,8 @@ public abstract class Disease : MonoBehaviour
     // Public properties for read-only access
     public float StaySickProbability => staySickProbability;
     public bool IsIncubating => isIncubating;
+
+    public bool dontDie = false;
 
     protected virtual void OnValidate()
     {
@@ -66,26 +68,29 @@ public abstract class Disease : MonoBehaviour
     {
         float random = Random.value;
 
-        if (random < deathProbability) Die();
-        else if (random < deathProbability + recoveryProbability) Recover();
+        if (random < deathProbability && !dontDie) Die();
+        else if (random < deathProbability + recoveryProbability && !dontDie) Recover();
         else StaySick();
     }
 
-    protected virtual void Die() {
+    protected virtual void Die()
+    {
         // run done the death animation
         Destroy(gameObject);
     } // Example implementation
-    protected virtual void Recover() {
-        Debug.Log("Tried To Recover");
-        Debug.Log(originalColor.ToString());
-        Debug.Log(originalMaterial.ToString());
+    protected virtual void Recover()
+    {
+        //Debug.Log("Tried To Recover");
+        //Debug.Log(originalColor.ToString());
+        //Debug.Log(originalMaterial.ToString());
 
         //originalMaterial.color = originalColor;
         Destroy(gameObject.GetComponent(this.GetType()));
     } // Remove disease component
     protected virtual void StaySick() { } // Custom logic in child classes
 
-    private void FixedUpdate() {
+    private void FixedUpdate()
+    {
         ResolveDisease();
     }
 }

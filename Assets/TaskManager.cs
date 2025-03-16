@@ -39,7 +39,8 @@ public class TaskManager : MonoBehaviour
     {
         if (currentTaskDuration > 0)
         {
-            if ((currentTaskPosition - transform.position).magnitude < 2) { currentTaskDuration -= Time.fixedDeltaTime; }
+            float dist = (currentTaskPosition.x - transform.position.x)*(currentTaskPosition.x - transform.position.x)+(currentTaskPosition.z - transform.position.z) * (currentTaskPosition.z - transform.position.z);
+            if (dist < 2) { currentTaskDuration -= Time.fixedDeltaTime; }
         }
         else
         {
