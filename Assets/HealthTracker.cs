@@ -1,12 +1,12 @@
 using System.Linq;
-using TMPro.Examples;
+using TMPro;
 using UnityEngine;
 
 public class HealthTracker : MonoBehaviour
 {
 
-    public Text infectedText;
-    public Text immuneText;
+    public TextMeshProUGUI infectedText;
+    public TextMeshProUGUI immuneText;
 
     int withImmunity = 0;
     int withDisease = 0;

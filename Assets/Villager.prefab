@@ -200,6 +200,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetPos: {x: 0, y: 0, z: 0}
   agent: {fileID: 6465999428668976342}
+  animator: {fileID: 0}
 --- !u!114 &2617002817199047794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -228,3 +229,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myDiseases: []
+  myImmunity: []
