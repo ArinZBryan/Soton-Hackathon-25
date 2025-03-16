@@ -8,23 +8,23 @@ public class person_disease : Disease
     {
         Debug.Log("Initialised Disease");
         // Set values either via code or Inspector
-        spreadProbabilityDuringIncubation = 0.006f;
-        spreadProbabilityAfterIncubation = 0.01f;
+        spreadProbabilityDuringIncubation = 0.5f;
+        spreadProbabilityAfterIncubation = 0.5f;
         interactionRadius = 5f;
-        deathProbability = 0.00500f;
-        recoveryProbability = 0.00100f;
+        deathProbability = 0.0010f;
+        recoveryProbability = 0.0100f;
         incubationPeriodDuration = 5f;
 
 
-        Renderer rend = GetComponent<Renderer>();
-        originalMaterial = rend.material;
-        originalColor = originalMaterial.color;
+        //Renderer rend = GetComponent<Renderer>();
+        //originalMaterial = rend.material;
+        //originalColor = originalMaterial.color;
     }
 
     public override void OnIncubationComplete()
     {
         // Add symptom visual effects or gameplay impacts
-        originalMaterial.color = originalColor * new Color(0.5f, 1f, 0.5f);
+        //originalMaterial.color = originalColor * new Color(0.5f, 1f, 0.5f);
     }
 
     protected override void StaySick()
@@ -34,7 +34,7 @@ public class person_disease : Disease
 
     protected override void Recover()
     {
-        originalMaterial.color = originalColor * new Color(1f, 0.5f, 0.5f);
+        //originalMaterial.color = originalColor * new Color(1f, 0.5f, 0.5f);
 
         Infectible MyInfectable = gameObject.GetComponent<Infectible>();
 
