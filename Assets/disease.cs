@@ -71,7 +71,7 @@ public abstract class Disease : MonoBehaviour
         else StaySick();
     }
 
-    protected virtual void Die() { 
+    protected virtual void Die() {
         // run done the death animation
         Destroy(gameObject);
     } // Example implementation
@@ -79,7 +79,8 @@ public abstract class Disease : MonoBehaviour
         Debug.Log("Tried To Recover");
         Debug.Log(originalColor.ToString());
         Debug.Log(originalMaterial.ToString());
-        originalMaterial.color = originalColor;
+
+        //originalMaterial.color = originalColor;
         Destroy(gameObject.GetComponent(this.GetType()));
     } // Remove disease component
     protected virtual void StaySick() { } // Custom logic in child classes
