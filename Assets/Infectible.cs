@@ -6,7 +6,8 @@ using System;
 public class Infectible : MonoBehaviour
 {
     SphereCollider infectArea;
-    public List<Disease> myDiseases;
+    public List<Disease> myDiseases = new List<Disease>();
+    public List<Immunity> myImmunity = new List<Immunity>();
 
     LayerMask mask;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -20,7 +21,14 @@ public class Infectible : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        for (int i = 0; i < myImmunity.Count; i++) {
+            float Immunityduration = myImmunity[i].immunityDuration;
+            if (Time.time - myImmunity[i].startTime > Immunityduration)
+            {
+                myImmunity.RemoveAt(i);
+            }
+        }
+
     }
 
     void OnTriggerEnter(Collider collider)
@@ -35,8 +43,14 @@ public class Infectible : MonoBehaviour
                 {
                     if (collidedWith.GetComponent(diseaseType) == null)
                     {
-                        collidedWith.AddComponent(diseaseType);
-                        collidedWith.GetComponent<Infectible>().myDiseases.Add((Disease)collidedWith.GetComponent(diseaseType));
+                        Infectible collidedWithInfectable = collidedWith.GetComponent<Infectible>();
+
+                        for (int j = 0; j < collidedWithInfectable.myImmunity.Count; j++) {
+                            if (myImmunity[j].diseaseType != diseaseType) {
+                                collidedWith.AddComponent(diseaseType);
+                                collidedWithInfectable.myDiseases.Add((Disease)collidedWith.GetComponent(diseaseType));
+                            }
+                        }
                     }
                 }
             }
