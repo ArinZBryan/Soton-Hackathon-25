@@ -29,19 +29,10 @@ public class HealthTracker : MonoBehaviour
 
     void Update()
     {
-        GameObject[] allObjects = FindObjectsByType<GameObject>(FindObjectsSortMode.None);
+        GameObject[] allObjects = GameObject.FindGameObjectsWithTag("Villager");
 
 
         withDisease = allObjects.Count(obj => obj.GetComponent<Disease>() != null);
-
-        diseaseList = allObjects
-            .Select(obj => obj.GetComponent<Infectible>()) // Get Infectible component
-            .Where(infectible => infectible != null)        // Filter out nulls
-            .SelectMany(infectible => infectible.myDiseases) // Flatten all Diseases
-            .Where(disease => disease != null)              // Ensure disease exists
-            .Select(disease => disease.GetType())           // Get the actual type
-            .Distinct()                                     // Remove duplicates
-            .ToList();
 
 
         var infectibleObjects = allObjects
@@ -53,17 +44,66 @@ public class HealthTracker : MonoBehaviour
         Debug.Log($"Objects with disease: {withDisease}");
         Debug.Log($"Objects with Immunity: {withImmunity}");
         Debug.Log($"Total objects: {infectibleObjects.Count}");
-        Debug.Log($"Diseases: {diseaseList}");
 
         infectedText.text = "Infected: " + withDisease.ToString();
         immuneText.text = "Immune: " + withImmunity.ToString();
 
         Dictionary<System.Type, int> diseaseData = GetDiseaseDistribution(allObjects);
 
-        personD.text = "Black Death: " + (diseaseData.ContainsKey(typeof(person_disease)) ? ((diseaseData[typeof(person_disease)] / infectibleObjects.Count) * 100).ToString() : "0") + "%";
-        secondD.text = "Smallpox: " + (diseaseData.ContainsKey(typeof(second_disease)) ? ((diseaseData[typeof(second_disease)] / infectibleObjects.Count) * 100).ToString() : "0") + "%";
-        LeprosyD.text = "Lepropsy: " + (diseaseData.ContainsKey(typeof(Lepropsy)) ? ((diseaseData[typeof(Lepropsy)] / infectibleObjects.Count) * 100).ToString() : "0") + "%";
-        TuberculosisD.text = "Tuberculosis: " + (diseaseData.ContainsKey(typeof(Tuberculosis)) ? ((diseaseData[typeof(Tuberculosis)] / infectibleObjects.Count) * 100).ToString() : "0") + "%";
+        var blackDeathPC = 0f;
+
+        if (diseaseData.ContainsKey(typeof(person_disease)))
+        {
+            diseaseData.TryGetValue(typeof(person_disease), out int blackDeathCount);
+            if (blackDeathCount > 0 && infectibleObjects.Count > 0)
+            {
+                blackDeathPC = ((float)blackDeathCount / infectibleObjects.Count) * 100f;
+            }
+        }
+
+        var smallpoxPC = 0f;
+
+        if (diseaseData.ContainsKey(typeof(second_disease)))
+        {
+            diseaseData.TryGetValue(typeof(second_disease), out int smallpoxCount);
+            if (smallpoxCount > 0 && infectibleObjects.Count > 0)
+            {
+                smallpoxPC = ((float)smallpoxCount / infectibleObjects.Count) * 100f;
+            }
+        }
+
+        var lepropsyPC = 0f;
+
+        if (diseaseData.ContainsKey(typeof(Lepropsy)))
+        {
+            diseaseData.TryGetValue(typeof(Lepropsy), out int lepropsyCount);
+            if (lepropsyCount > 0 && infectibleObjects.Count > 0)
+            {
+                lepropsyPC = ((float)lepropsyCount / infectibleObjects.Count) * 100f;
+            }
+        }
+
+        var tuberculosisPC = 0f;
+
+        if (diseaseData.ContainsKey(typeof(Tuberculosis)))
+        {
+            diseaseData.TryGetValue(typeof(Tuberculosis), out int tuberculosisCount);
+            if (tuberculosisCount > 0 && infectibleObjects.Count > 0)
+            {
+                tuberculosisPC = ((float)tuberculosisCount / infectibleObjects.Count) * 100f;
+            }
+        }
+
+
+        personD.text = "Black Death: " + blackDeathPC.ToString("F2").Substring(0, 4) + "%";
+        secondD.text = "Smallpox: " + smallpoxPC.ToString("F2").Substring(0, 4) + "%";
+        LeprosyD.text = "Lepropsy: " + lepropsyPC.ToString("F2").Substring(0, 4) + "%";
+        TuberculosisD.text = "Tuberculosis: " + tuberculosisPC.ToString("F2").Substring(0, 4) + "%";
+
+        //personD.text = "Black Death: " + (diseaseData.ContainsKey(typeof(person_disease)) ? ((diseaseData[typeof(person_disease)] / infectibleObjects.Count) * 100).ToString() : "0") + "%";
+        //secondD.text = "Smallpox: " + (diseaseData.ContainsKey(typeof(second_disease)) ? ((diseaseData[typeof(second_disease)] / infectibleObjects.Count) * 100).ToString() : "0") + "%";
+        //LeprosyD.text = "Lepropsy: " + (diseaseData.ContainsKey(typeof(Lepropsy)) ? ((diseaseData[typeof(Lepropsy)] / infectibleObjects.Count) * 100).ToString() : "0") + "%";
+        //TuberculosisD.text = "Tuberculosis: " + (diseaseData.ContainsKey(typeof(Tuberculosis)) ? ((diseaseData[typeof(Tuberculosis)] / infectibleObjects.Count) * 100).ToString() : "0") + "%";
 
     }
 
@@ -74,7 +114,6 @@ public class HealthTracker : MonoBehaviour
         foreach (GameObject obj in allObjects)
         {
             Infectible infectible = obj.GetComponent<Infectible>();
-            if (infectible == null) continue;
 
             foreach (Disease disease in infectible.myDiseases)
             {
