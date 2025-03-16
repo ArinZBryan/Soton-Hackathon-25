@@ -2,18 +2,18 @@ using UnityEngine;
 using System;
 using TMPro.Examples;
 
-public class person_disease : Disease
+public class Lepropsy : Disease
 {
     public override void InitializeDisease()
     {
         Debug.Log("Initialised Disease");
         // Set values either via code or Inspector
-        spreadProbabilityDuringIncubation = 0.006f;
-        spreadProbabilityAfterIncubation = 0.01f;
-        interactionRadius = 5f;
-        deathProbability = 0.00500f;
-        recoveryProbability = 0.00100f;
-        incubationPeriodDuration = 5f;
+        spreadProbabilityDuringIncubation = 0.0005f;
+        spreadProbabilityAfterIncubation = 0.001f;
+        interactionRadius = 1f;
+        deathProbability = 0.000500f;
+        recoveryProbability = 0.00300f;
+        incubationPeriodDuration = 2000f;
 
 
         Renderer rend = GetComponent<Renderer>();
