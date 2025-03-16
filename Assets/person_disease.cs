@@ -1,4 +1,6 @@
 using UnityEngine;
+using System;
+using TMPro.Examples;
 
 public class person_disease : Disease
 {
@@ -31,7 +33,13 @@ public class person_disease : Disease
 
     protected override void Recover()
     {
-        gameObject.GetComponent<Infectible>().myDiseases.Remove(this);
+        originalMaterial.color = originalColor * new Color(1f, 0.5f, 0.5f);
+
+        Infectible MyInfectable = gameObject.GetComponent<Infectible>();
+
+        MyInfectable.myImmunity.Add(new Immunity(this.GetType()));
+        MyInfectable.myDiseases.Remove(this);
+        Debug.Log(MyInfectable.myDiseases);
         base.Recover();
     }
 }
